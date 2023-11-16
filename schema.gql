@@ -42,6 +42,7 @@ type Query {
   signIn(input: SignInInput!): AuthenticatedUser!
   getUser(userId: String!): User!
   getDocuments: [Document!]!
+  getDocument(id: String!): Document!
 }
 
 input SignInInput {

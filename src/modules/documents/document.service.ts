@@ -47,4 +47,21 @@ export class DocumentService {
 
     return data as Document[];
   }
+
+  async getDocument(documentId: string, userId: string): Promise<Document> {
+    const { error, data } = await this.db
+      .from('documents')
+      .select()
+      .eq('id', documentId)
+      .eq('owner_id', userId); //check for ownership
+
+    if (error) throw new Error(error.message);
+    if (!data || !data.length) {
+      throw new Error(
+        `Cannot find document or you do not have permission to access it`,
+      );
+    }
+
+    return data[0] as Document;
+  }
 }

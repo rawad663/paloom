@@ -41,4 +41,16 @@ export class DocumentsResolver {
 
     return documents;
   }
+
+  @Query(() => Document)
+  async getDocument(
+    @Args('id') id: string,
+    @Context() context: any,
+  ): Promise<Document> {
+    const userId = context.req.user.id as string;
+
+    const document = await this.documentService.getDocument(id, userId);
+
+    return document;
+  }
 }
