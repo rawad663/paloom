@@ -23,6 +23,18 @@ export class DocumentsResolver {
     return newDocument;
   }
 
+  @Mutation(() => Boolean)
+  async deleteDocument(
+    @Args('id') id: string,
+    @Context() context: any,
+  ): Promise<boolean> {
+    const userId = context.req.user.id as string;
+
+    const deleted = await this.documentService.deleteDocument(id, userId);
+
+    return deleted;
+  }
+
   @Query(() => [Document])
   async getDocuments(@Context() context: any): Promise<Document[]> {
     const userId = context.req.user.id as string;

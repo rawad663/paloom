@@ -34,6 +34,18 @@ export class DocumentService {
     return data as Document;
   }
 
+  async deleteDocument(documentId: string, userId: string): Promise<boolean> {
+    const { error } = await this.db
+      .from('documents')
+      .delete()
+      .eq('id', documentId)
+      .eq('owner_id', userId);
+
+    if (error) throw new Error(error.message);
+
+    return true;
+  }
+
   async getDocuments(userId: string): Promise<Document[]> {
     const { error, data } = await this.db
       .from('documents')

@@ -53,6 +53,7 @@ input SignInInput {
 type Mutation {
   createUser(input: CreateUserInput!): User!
   createDocument(input: CreateDocumentInput!): Document!
+  deleteDocument(id: String!): Boolean!
 }
 
 input CreateUserInput {
