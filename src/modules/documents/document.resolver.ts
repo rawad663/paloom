@@ -1,11 +1,4 @@
-import {
-  Resolver,
-  Query,
-  Mutation,
-  Args,
-  Context,
-  GqlExecutionContext,
-} from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Context } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@/guards/auth.guard';
 
@@ -25,10 +18,7 @@ export class DocumentsResolver {
   ): Promise<Document> {
     const userId = context.req.user.id as string;
 
-    const newDocument = await this.documentService.createDocument(
-      input,
-      userId,
-    );
+    const newDocument = await this.documentService.createDocument(input, userId);
 
     return newDocument;
   }
@@ -43,10 +33,7 @@ export class DocumentsResolver {
   }
 
   @Query(() => Document)
-  async getDocument(
-    @Args('id') id: string,
-    @Context() context: any,
-  ): Promise<Document> {
+  async getDocument(@Args('id') id: string, @Context() context: any): Promise<Document> {
     const userId = context.req.user.id as string;
 
     const document = await this.documentService.getDocument(id, userId);

@@ -15,10 +15,7 @@ export class DocumentService {
     this.db = dbService.getClient();
   }
 
-  async createDocument(
-    input: CreateDocumentInput,
-    userId: string,
-  ): Promise<Document> {
+  async createDocument(input: CreateDocumentInput, userId: string): Promise<Document> {
     const sanitizedInput = sanitizeInput(input);
     const id: string = uuidv4();
 
@@ -57,9 +54,7 @@ export class DocumentService {
 
     if (error) throw new Error(error.message);
     if (!data || !data.length) {
-      throw new Error(
-        `Cannot find document or you do not have permission to access it`,
-      );
+      throw new Error(`Cannot find document or you do not have permission to access it`);
     }
 
     return data[0] as Document;
