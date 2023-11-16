@@ -1,0 +1,50 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserMetadata {
+  name: String
+}
+
+type Session {
+  access_token: String!
+  token_type: String!
+  expires_in: Int!
+  expires_at: Int!
+  refresh_token: String!
+}
+
+type User {
+  id: ID!
+  aud: String!
+  role: String!
+  user_metadata: UserMetadata
+  created_at: String!
+  updated_at: String!
+  email: String!
+}
+
+type AuthenticatedUser {
+  user: User!
+  session: Session!
+}
+
+type Query {
+  signIn(input: SignInInput!): AuthenticatedUser!
+  getUser(userId: String!): User!
+}
+
+input SignInInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  createUser(input: CreateUserInput!): User!
+}
+
+input CreateUserInput {
+  name: String
+  email: String!
+  password: String!
+}
