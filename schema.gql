@@ -41,10 +41,16 @@ input SignInInput {
 
 type Mutation {
   createUser(input: CreateUserInput!): User!
+  createDocument(input: CreateDocumentInput!): Boolean!
 }
 
 input CreateUserInput {
   name: String
   email: String!
   password: String!
+}
+
+input CreateDocumentInput {
+  title: String
+  content: String
 }
