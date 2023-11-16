@@ -29,9 +29,19 @@ type AuthenticatedUser {
   session: Session!
 }
 
+type Document {
+  id: ID!
+  owner_id: ID!
+  title: String
+  content: String
+  created_at: String!
+  updated_at: String
+}
+
 type Query {
   signIn(input: SignInInput!): AuthenticatedUser!
   getUser(userId: String!): User!
+  getDocuments: [Document!]!
 }
 
 input SignInInput {
@@ -41,7 +51,7 @@ input SignInInput {
 
 type Mutation {
   createUser(input: CreateUserInput!): User!
-  createDocument(input: CreateDocumentInput!): Boolean!
+  createDocument(input: CreateDocumentInput!): Document!
 }
 
 input CreateUserInput {
